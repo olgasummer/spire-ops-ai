@@ -633,6 +633,8 @@
       </div>
     </div>
 
+    <div style="text-align:right; font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--text-muted); margin-top:0.75rem;" id="last-updated"></div>
+
     <div class="anomaly-banner fade-in">
       <div class="anomaly-icon">⚠</div>
       <div>
@@ -795,15 +797,57 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 
-// Live stat ticker — simulate small fluctuations
-let passCount = 14;
-function tick() {
-  passCount += Math.random() > 0.7 ? 1 : 0;
-  document.getElementById("stat-passes").textContent = passCount;
-  const temp = (41.5 + Math.random() * 1.5).toFixed(1);
-  document.getElementById("stat-temp").textContent = temp + "°C";
+// ── Fetch real telemetry from data.json ──
+const DATA_URL = "data.json";
+
+function timeAgo(isoString) {
+  const diff = Math.floor((Date.now() - new Date(isoString)) / 1000);
+  if (diff < 60) return `${diff}s ago`;
+  if (diff < 3600) return `${Math.floor(diff/60)}m ago`;
+  return `${Math.floor(diff/3600)}h ago`;
 }
-setInterval(tick, 4000);
+
+async function fetchTelemetry() {
+  try {
+    const res = await fetch(DATA_URL + "?_=" + Date.now());
+    if (!res.ok) throw new Error("not found");
+    const d = await res.json();
+
+    document.getElementById("stat-online").textContent =
+      d.satellites_online + "/" + d.total_satellites;
+    document.getElementById("stat-anomalies").textContent =
+      d.active_anomalies;
+    document.getElementById("stat-passes").textContent =
+      d.active_ground_passes;
+
+    if (d.spire007 && d.spire007.obc_temperature_c) {
+      document.getElementById("stat-temp").textContent =
+        d.spire007.obc_temperature_c + "°C";
+    }
+
+    // Update anomaly banner
+    if (d.spire007 && d.spire007.attitude_status === "degraded") {
+      const desc = document.querySelector(".anomaly-desc");
+      if (desc) {
+        desc.textContent =
+          `OBC temperature ${d.spire007.obc_temperature_c}°C · ` +
+          `Reaction wheel RPM ${d.spire007.reaction_wheel_rpm} · ` +
+          `Power draw ${d.spire007.power_draw_mw}mW · ` +
+          `Attitude status: degraded`;
+      }
+    }
+
+    // Show last updated time
+    const el = document.getElementById("last-updated");
+    if (el && d.updated_at) el.textContent = "Updated " + timeAgo(d.updated_at);
+
+  } catch(e) {
+    console.log("data.json not yet available — using placeholder values");
+  }
+}
+
+fetchTelemetry();
+setInterval(fetchTelemetry, 60000);
 </script>
 </body>
 </html>
