@@ -32,15 +32,13 @@
 </style>
 <style>
   :root {
-    /* InfluxData Brand Colors */
-    --magenta: #D30971;
-    --purple: #9B2AFF;
-    --navy: #020A47;
-    --navy-2: #0a0e2a;
-    --navy-3: #151b3d;
-    --navy-4: #1f2550;
-    --purple-light: #c47dff;
-    --purple-pale: #f3e8ff;
+    --navy: #0a0e1a;
+    --navy-2: #111827;
+    --navy-3: #1a2235;
+    --navy-4: #243048;
+    --purple: #7c3aed;
+    --purple-light: #a78bfa;
+    --purple-pale: #ede9fe;
     --cyan: #22d3ee;
     --cyan-dim: #0891b2;
     --green: #10b981;
@@ -49,9 +47,9 @@
     --text-primary: #f1f5f9;
     --text-secondary: #94a3b8;
     --text-muted: #475569;
-    --border: rgba(155, 42, 255, 0.2);
+    --border: rgba(124, 58, 237, 0.2);
     --border-subtle: rgba(255,255,255,0.06);
-    --glow-purple: 0 0 60px rgba(155, 42, 255, 0.15);
+    --glow-purple: 0 0 60px rgba(124, 58, 237, 0.15);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -72,8 +70,8 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(155,42,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(155,42,255,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
     background-size: 48px 48px;
     pointer-events: none;
     z-index: 0;
@@ -121,7 +119,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
     color: var(--purple-light);
-    border: 1px solid rgba(155,42,255,0.4);
+    border: 1px solid rgba(124,58,237,0.4);
     padding: 3px 10px;
     border-radius: 100px;
     letter-spacing: 0.05em;
@@ -151,7 +149,7 @@
     top: 10%; right: -10%;
     width: 600px; height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(155,42,255,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -170,7 +168,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.75rem;
     letter-spacing: 0.12em;
-    color: #fff;
+    color: var(--purple-light);
     text-transform: uppercase;
     margin-bottom: 1.5rem;
     display: flex;
@@ -182,7 +180,7 @@
     content: '';
     display: block;
     width: 32px; height: 1px;
-    background: #fff;
+    background: var(--purple-light);
   }
 
   h1 {
@@ -195,7 +193,8 @@
   }
 
   h1 .accent {
-    color: #fff;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--purple-light);
   }
 
   .hero-sub {
@@ -211,7 +210,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(90deg, #D30971, #9B2AFF);
+    background: var(--purple);
     color: white;
     padding: 0.875rem 2rem;
     border-radius: 6px;
@@ -221,10 +220,7 @@
     transition: background 0.2s, transform 0.2s;
   }
 
-  .hero-cta:hover { 
-    background: linear-gradient(90deg, #b00761, #7a21cc); 
-    transform: translateY(-1px); 
-  }
+  .hero-cta:hover { background: #6d28d9; transform: translateY(-1px); }
 
   /* ── LIVE STATS ── */
   .stats-section {
@@ -286,13 +282,17 @@
     font-weight: 700;
     line-height: 1;
     margin-bottom: 0.4rem;
-    color: #fff;
   }
 
   .stat-sub {
     font-size: 14px;
     color: #fff;
   }
+
+  .stat-card.alert .stat-value { color: var(--red); }
+  .stat-card.online .stat-value { color: var(--green); }
+  .stat-card.passes .stat-value { color: var(--cyan); }
+  .stat-card.temp .stat-value { color: var(--amber); }
 
   .live-dot {
     display: inline-block;
@@ -319,7 +319,7 @@
   .anomaly-icon {
     width: 36px; height: 36px;
     border-radius: 50%;
-    background: var(--magenta);
+    background: #9B2AFF;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -329,7 +329,7 @@
 
   .anomaly-title {
     font-weight: 500;
-    color: #fff;
+    color: #fca5a5;
     font-size: 0.9rem;
     margin-bottom: 2px;
   }
@@ -402,43 +402,20 @@
   .step-num {
     width: 28px; height: 28px;
     border-radius: 6px;
-    background: linear-gradient(135deg, #D30971, #9B2AFF);
-    border: 1px solid #D30971;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid rgba(124,58,237,0.4);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
-    color: #fff;
+    color: var(--purple-light);
     flex-shrink: 0;
     margin-top: 2px;
   }
 
   .step-text { font-size: 16px; color: #fff; }
   .step-text strong { color: var(--text-primary); font-weight: 500; display: block; margin-bottom: 2px; }
-
-  /* ── RECOMMENDATION BOX ── */
-  .recommendation-box {
-    background: #FAFAFA;
-    border-radius: 12px;
-    padding: 2rem;
-    margin-top: 3rem;
-    border: 1px solid #E5E7EB;
-  }
-
-  .recommendation-box .step-num {
-    background: linear-gradient(135deg, #D30971, #9B2AFF);
-    border: 1px solid #D30971;
-    color: #fff;
-  }
-
-  .recommendation-box .step-text {
-    color: #020A47;
-  }
-
-  .recommendation-box .step-text strong {
-    color: #020A47;
-  }
 
   /* ── TECH STACK ── */
   .tech-section {
@@ -466,7 +443,7 @@
   }
 
   .tech-card:hover {
-    border-color: rgba(155,42,255,0.4);
+    border-color: rgba(124,58,237,0.4);
     transform: translateY(-3px);
   }
 
@@ -477,9 +454,9 @@
     height: 2px;
   }
 
-  .tech-card.influx::before { background: linear-gradient(90deg, #D30971, #9B2AFF); }
-  .tech-card.mcp::before { background: linear-gradient(90deg, #D30971, #9B2AFF); }
-  .tech-card.claude::before { background: linear-gradient(90deg, #D30971, #9B2AFF); }
+  .tech-card.influx::before { background: linear-gradient(90deg, var(--purple), var(--purple-light)); }
+  .tech-card.mcp::before { background: linear-gradient(90deg, var(--cyan-dim), var(--cyan)); }
+  .tech-card.claude::before { background: linear-gradient(90deg, #d97706, #f59e0b); }
 
   .tech-icon {
     width: 44px; height: 44px;
@@ -491,9 +468,9 @@
     font-size: 1.3rem;
   }
 
-  .tech-card.influx .tech-icon { background: #fff; color: #020A47; }
-  .tech-card.mcp .tech-icon { background: #fff; color: #020A47; }
-  .tech-card.claude .tech-icon { background: #fff; color: #020A47; }
+  .tech-card.influx .tech-icon { background: rgba(124,58,237,0.15); }
+  .tech-card.mcp .tech-icon { background: rgba(34,211,238,0.12); }
+  .tech-card.claude .tech-icon { background: rgba(245,158,11,0.12); }
 
   .tech-name {
     font-family: 'ProximaNova', sans-serif;
@@ -524,8 +501,8 @@
 
   .flow-diagram {
     margin-top: 3rem;
-    background: #fff;
-    border: 1px solid #E5E7EB;
+    background: var(--navy-2);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     padding: 2rem;
     display: flex;
@@ -537,18 +514,18 @@
   }
 
   .flow-node {
-    background: #FAFAFA;
-    border: 1px solid #E5E7EB;
+    background: var(--navy-3);
+    border: 1px solid var(--border);
     border-radius: 8px;
     padding: 0.75rem 1.25rem;
     font-size: 0.82rem;
     font-family: 'DM Mono', monospace;
-    color: #020A47;
+    color: var(--purple-light);
     white-space: nowrap;
   }
 
   .flow-arrow {
-    color: #020A47;
+    color: #fff;
     font-size: 1rem;
     padding: 0 0.75rem;
   }
@@ -577,7 +554,7 @@
     transition: border-color 0.2s;
   }
 
-  .team-card:hover { border-color: rgba(155,42,255,0.4); }
+  .team-card:hover { border-color: rgba(124,58,237,0.4); }
 
   .team-avatar {
     width: 36px; height: 36px;
@@ -627,6 +604,133 @@
   .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* ── SATELLITE SELECTOR ── */
+  .satellite-section {
+    padding: 5rem 2rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .satellite-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .satellite-selector label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .satellite-selector select {
+    background: var(--navy-3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'ProximaNova', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    outline: none;
+    min-width: 200px;
+  }
+
+  .satellite-selector select:hover {
+    border-color: var(--purple-light);
+  }
+
+  .satellite-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .satellite-status-badge.nominal {
+    background: rgba(16,185,129,0.15);
+    border: 1px solid rgba(16,185,129,0.4);
+    color: #6ee7b7;
+  }
+
+  .satellite-status-badge.degraded {
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.4);
+    color: #fca5a5;
+  }
+
+  .satellite-status-badge.offline {
+    background: rgba(100,116,139,0.15);
+    border: 1px solid rgba(100,116,139,0.3);
+    color: #94a3b8;
+  }
+
+  .sat-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sat-metric {
+    background: var(--navy-2);
+    padding: 1.5rem;
+    transition: background 0.2s;
+  }
+
+  .sat-metric:hover { background: var(--navy-3); }
+
+  .sat-metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .sat-metric-value {
+    font-family: 'ProximaNova', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .sat-metric-unit {
+    font-size: 13px;
+    color: #fff;
+  }
+
+  .sat-offline-msg {
+    background: var(--navy-2);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.9rem;
+  }
+
+  .sat-last-seen {
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: #fff;
   }
 </style>
 </head>
@@ -695,6 +799,38 @@
   </div>
 </section>
 
+
+<!-- SATELLITE SELECTOR -->
+<section class="satellite-section fade-in">
+  <div class="container">
+    <div class="section-label">Fleet explorer</div>
+    <h2>Inspect any satellite.</h2>
+    <div class="satellite-selector">
+      <label>Select satellite</label>
+      <select id="sat-select">
+        <option value="">— choose a satellite —</option>
+        <option value="SPIRE-001">SPIRE-001</option>
+        <option value="SPIRE-002">SPIRE-002</option>
+        <option value="SPIRE-003">SPIRE-003</option>
+        <option value="SPIRE-004">SPIRE-004</option>
+        <option value="SPIRE-005">SPIRE-005</option>
+        <option value="SPIRE-006">SPIRE-006</option>
+        <option value="SPIRE-007">SPIRE-007 ⚠</option>
+        <option value="SPIRE-008">SPIRE-008</option>
+        <option value="SPIRE-009">SPIRE-009</option>
+        <option value="SPIRE-010">SPIRE-010</option>
+        <option value="SPIRE-011">SPIRE-011</option>
+        <option value="SPIRE-012">SPIRE-012</option>
+      </select>
+      <span id="sat-status-badge"></span>
+    </div>
+
+    <div id="sat-detail">
+      <div class="sat-offline-msg">Select a satellite above to view its latest telemetry.</div>
+    </div>
+  </div>
+</section>
+
 <!-- PROBLEM / SOLUTION -->
 <section class="problem-section fade-in">
   <div class="container">
@@ -740,14 +876,11 @@
             <div class="step-num">04</div>
             <div class="step-text"><strong>Surface precedents</strong>Finds SPIRE-003 and SPIRE-009 events that preceded component failures 48–72hrs later.</div>
           </div>
+          <div class="solution-step">
+            <div class="step-num">05</div>
+            <div class="step-text"><strong>Recommend action</strong>Reduce tasking load, flag for engineering review, and schedule a maintenance window.</div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Recommendation Box -->
-    <div class="recommendation-box">
-      <div class="solution-step">
-        <div class="step-text"><strong>RECOMMEND ACTION</strong>Reduce tasking load, flag for engineering review, and schedule a maintenance window.</div>
       </div>
     </div>
   </div>
@@ -822,13 +955,13 @@
 <script>
 const members = ["Morea","Jill","Charles","Ryan","Cole","Olga","Pat"];
 const colors = [
-  "135deg, #9B2AFF, #9394FF",
-  "135deg, #9B2AFF, #9394FF",
-  "135deg, #9B2AFF, #9394FF",
-  "135deg, #9B2AFF, #9394FF",
-  "135deg, #9B2AFF, #9394FF",
-  "135deg, #9B2AFF, #9394FF",
-  "135deg, #9B2AFF, #9394FF"
+  "135deg, #7c3aed, #0891b2",
+  "135deg, #0891b2, #10b981",
+  "135deg, #d97706, #ef4444",
+  "135deg, #10b981, #7c3aed",
+  "135deg, #ef4444, #d97706",
+  "135deg, #7c3aed, #ec4899",
+  "135deg, #0891b2, #7c3aed"
 ];
 
 const grid = document.getElementById("team-grid");
@@ -901,6 +1034,71 @@ async function fetchTelemetry() {
 
 fetchTelemetry();
 setInterval(fetchTelemetry, 60000);
+
+// ── Satellite selector ──
+let telemetryData = null;
+
+async function loadTelemetry() {
+  try {
+    const res = await fetch("data.json?_=" + Date.now());
+    if (!res.ok) throw new Error("not found");
+    telemetryData = await res.json();
+    updateSatDisplay();
+  } catch(e) {
+    console.log("data.json not available yet");
+  }
+}
+
+function updateSatDisplay() {
+  const select = document.getElementById("sat-select");
+  const satId = select.value;
+  const detail = document.getElementById("sat-detail");
+  const badge = document.getElementById("sat-status-badge");
+
+  if (!satId || !telemetryData) {
+    detail.innerHTML = '<div class="sat-offline-msg">Select a satellite above to view its latest telemetry.</div>';
+    badge.innerHTML = '';
+    return;
+  }
+
+  const sat = telemetryData.all_satellites && telemetryData.all_satellites[satId];
+
+  if (!sat) {
+    badge.innerHTML = '<span class="satellite-status-badge offline">● offline</span>';
+    detail.innerHTML = '<div class="sat-offline-msg">No recent telemetry for ' + satId + ' — satellite is between ground passes.</div>';
+    return;
+  }
+
+  const status = sat.attitude_status || "nominal";
+  badge.innerHTML = '<span class="satellite-status-badge ' + status + '">● ' + status + '</span>';
+
+  const tempColor = sat.obc_temperature_c > 38 ? '#fca5a5' : sat.obc_temperature_c > 33 ? '#fcd34d' : '#6ee7b7';
+  const rpmColor = sat.reaction_wheel_rpm > 4500 ? '#fca5a5' : '#fff';
+  const powerColor = sat.power_draw_mw > 2200 ? '#fca5a5' : '#fff';
+
+  detail.innerHTML = '<div class="sat-metrics-grid">' +
+    metricCard("OBC temperature", sat.obc_temperature_c, "°C", tempColor) +
+    metricCard("Battery voltage", sat.battery_voltage_v, "V", '#fff') +
+    metricCard("Solar current", sat.solar_current_ma, "mA", '#fff') +
+    metricCard("Reaction wheel", sat.reaction_wheel_rpm, "RPM", rpmColor) +
+    metricCard("Power draw", sat.power_draw_mw, "mW", powerColor) +
+    metricCard("RF link margin", sat.rf_link_margin_db, "dB", '#fff') +
+    '</div>' +
+    '<div class="sat-last-seen">Last telemetry received: ' + (sat.last_seen ? sat.last_seen.replace('T', ' ').substring(0, 19) + ' UTC' : 'unknown') + '</div>';
+}
+
+function metricCard(label, value, unit, color) {
+  return '<div class="sat-metric">' +
+    '<div class="sat-metric-label">' + label + '</div>' +
+    '<div class="sat-metric-value" style="color:' + color + '">' + value + '</div>' +
+    '<div class="sat-metric-unit">' + unit + '</div>' +
+    '</div>';
+}
+
+document.getElementById("sat-select").addEventListener("change", updateSatDisplay);
+loadTelemetry();
+setInterval(loadTelemetry, 60000);
+
 </script>
 </body>
 </html>
