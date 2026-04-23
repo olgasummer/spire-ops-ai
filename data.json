@@ -1,45 +1,23 @@
 {
-  "updated_at": "2026-04-23T23:32:20Z",
-  "satellites_online": 3,
+  "updated_at": "2026-04-23T23:33:22Z",
+  "satellites_online": 2,
   "total_satellites": 12,
-  "active_anomalies": 1,
-  "anomalies": [
-    {
-      "satellite_id": "SPIRE-007",
-      "obc_temperature_c": 42.8,
-      "reaction_wheel_rpm": 5136.0,
-      "power_draw_mw": 2544.0,
-      "battery_voltage_v": 8.118,
-      "solar_current_ma": 365.5,
-      "rf_link_margin_db": 11.71,
-      "attitude_status": "degraded",
-      "last_seen": "2026-04-23 23:21:57.575112960"
-    }
-  ],
+  "active_anomalies": 0,
+  "anomalies": [],
   "active_ground_passes": 3,
   "records_today": 6216,
-  "spire007": {
-    "satellite_id": "SPIRE-007",
-    "obc_temperature_c": 42.8,
-    "reaction_wheel_rpm": 5136.0,
-    "power_draw_mw": 2544.0,
-    "battery_voltage_v": 8.118,
-    "solar_current_ma": 365.5,
-    "rf_link_margin_db": 11.71,
-    "attitude_status": "degraded",
-    "last_seen": "2026-04-23 23:21:57.575112960"
-  },
+  "spire007": {},
   "all_satellites": {
     "SPIRE-005": {
       "satellite_id": "SPIRE-005",
-      "obc_temperature_c": 28.1,
-      "reaction_wheel_rpm": 3161.0,
-      "power_draw_mw": 1784.0,
-      "battery_voltage_v": 8.22,
-      "solar_current_ma": 519.2,
-      "rf_link_margin_db": 12.72,
+      "obc_temperature_c": 27.9,
+      "reaction_wheel_rpm": 3176.0,
+      "power_draw_mw": 1789.0,
+      "battery_voltage_v": 8.271,
+      "solar_current_ma": 523.6,
+      "rf_link_margin_db": 12.92,
       "attitude_status": "nominal",
-      "last_seen": "2026-04-23 23:32:15.553303040"
+      "last_seen": "2026-04-23 23:33:15.557110016"
     },
     "SPIRE-006": {
       "satellite_id": "SPIRE-006",
@@ -51,17 +29,6 @@
       "rf_link_margin_db": 12.45,
       "attitude_status": "nominal",
       "last_seen": "2026-04-23 23:29:27.558918912"
-    },
-    "SPIRE-007": {
-      "satellite_id": "SPIRE-007",
-      "obc_temperature_c": 42.8,
-      "reaction_wheel_rpm": 5136.0,
-      "power_draw_mw": 2544.0,
-      "battery_voltage_v": 8.118,
-      "solar_current_ma": 365.5,
-      "rf_link_margin_db": 11.71,
-      "attitude_status": "degraded",
-      "last_seen": "2026-04-23 23:21:57.575112960"
     }
   }
 }
