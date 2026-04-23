@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-04-23T19:14:49Z",
-  "satellites_online": 2,
+  "updated_at": "2026-04-23T19:15:52Z",
+  "satellites_online": 3,
   "total_satellites": 12,
   "active_anomalies": 0,
   "anomalies": [],
-  "active_ground_passes": 2,
-  "records_today": 5563,
+  "active_ground_passes": 3,
+  "records_today": 5571,
   "spire007": {}
 }
