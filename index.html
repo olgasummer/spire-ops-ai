@@ -32,13 +32,15 @@
 </style>
 <style>
   :root {
-    --navy: #0a0e1a;
-    --navy-2: #111827;
-    --navy-3: #1a2235;
-    --navy-4: #243048;
-    --purple: #7c3aed;
-    --purple-light: #a78bfa;
-    --purple-pale: #ede9fe;
+    /* InfluxData Brand Colors */
+    --magenta: #D30971;
+    --purple: #9B2AFF;
+    --navy: #020A47;
+    --navy-2: #0a0e2a;
+    --navy-3: #151b3d;
+    --navy-4: #1f2550;
+    --purple-light: #c47dff;
+    --purple-pale: #f3e8ff;
     --cyan: #22d3ee;
     --cyan-dim: #0891b2;
     --green: #10b981;
@@ -47,9 +49,9 @@
     --text-primary: #f1f5f9;
     --text-secondary: #94a3b8;
     --text-muted: #475569;
-    --border: rgba(124, 58, 237, 0.2);
+    --border: rgba(155, 42, 255, 0.2);
     --border-subtle: rgba(255,255,255,0.06);
-    --glow-purple: 0 0 60px rgba(124, 58, 237, 0.15);
+    --glow-purple: 0 0 60px rgba(155, 42, 255, 0.15);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -70,8 +72,8 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(155,42,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(155,42,255,0.04) 1px, transparent 1px);
     background-size: 48px 48px;
     pointer-events: none;
     z-index: 0;
@@ -119,7 +121,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
     color: var(--purple-light);
-    border: 1px solid rgba(124,58,237,0.4);
+    border: 1px solid rgba(155,42,255,0.4);
     padding: 3px 10px;
     border-radius: 100px;
     letter-spacing: 0.05em;
@@ -149,7 +151,7 @@
     top: 10%; right: -10%;
     width: 600px; height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(155,42,255,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -168,7 +170,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.75rem;
     letter-spacing: 0.12em;
-    color: var(--purple-light);
+    color: #fff;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
     display: flex;
@@ -180,7 +182,7 @@
     content: '';
     display: block;
     width: 32px; height: 1px;
-    background: var(--purple-light);
+    background: #fff;
   }
 
   h1 {
@@ -193,8 +195,7 @@
   }
 
   h1 .accent {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--purple-light);
+    color: #fff;
   }
 
   .hero-sub {
@@ -210,7 +211,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--purple);
+    background: linear-gradient(90deg, #D30971, #9B2AFF);
     color: white;
     padding: 0.875rem 2rem;
     border-radius: 6px;
@@ -220,7 +221,10 @@
     transition: background 0.2s, transform 0.2s;
   }
 
-  .hero-cta:hover { background: #6d28d9; transform: translateY(-1px); }
+  .hero-cta:hover { 
+    background: linear-gradient(90deg, #b00761, #7a21cc); 
+    transform: translateY(-1px); 
+  }
 
   /* ── LIVE STATS ── */
   .stats-section {
@@ -282,17 +286,13 @@
     font-weight: 700;
     line-height: 1;
     margin-bottom: 0.4rem;
+    color: #fff;
   }
 
   .stat-sub {
     font-size: 14px;
     color: #fff;
   }
-
-  .stat-card.alert .stat-value { color: var(--red); }
-  .stat-card.online .stat-value { color: var(--green); }
-  .stat-card.passes .stat-value { color: var(--cyan); }
-  .stat-card.temp .stat-value { color: var(--amber); }
 
   .live-dot {
     display: inline-block;
@@ -319,7 +319,7 @@
   .anomaly-icon {
     width: 36px; height: 36px;
     border-radius: 50%;
-    background: #9B2AFF;
+    background: var(--magenta);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -329,7 +329,7 @@
 
   .anomaly-title {
     font-weight: 500;
-    color: #fca5a5;
+    color: #fff;
     font-size: 0.9rem;
     margin-bottom: 2px;
   }
@@ -402,20 +402,43 @@
   .step-num {
     width: 28px; height: 28px;
     border-radius: 6px;
-    background: rgba(124,58,237,0.2);
-    border: 1px solid rgba(124,58,237,0.4);
+    background: linear-gradient(135deg, #D30971, #9B2AFF);
+    border: 1px solid #D30971;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
-    color: var(--purple-light);
+    color: #fff;
     flex-shrink: 0;
     margin-top: 2px;
   }
 
   .step-text { font-size: 16px; color: #fff; }
   .step-text strong { color: var(--text-primary); font-weight: 500; display: block; margin-bottom: 2px; }
+
+  /* ── RECOMMENDATION BOX ── */
+  .recommendation-box {
+    background: #FAFAFA;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 3rem;
+    border: 1px solid #E5E7EB;
+  }
+
+  .recommendation-box .step-num {
+    background: linear-gradient(135deg, #D30971, #9B2AFF);
+    border: 1px solid #D30971;
+    color: #fff;
+  }
+
+  .recommendation-box .step-text {
+    color: #020A47;
+  }
+
+  .recommendation-box .step-text strong {
+    color: #020A47;
+  }
 
   /* ── TECH STACK ── */
   .tech-section {
@@ -443,7 +466,7 @@
   }
 
   .tech-card:hover {
-    border-color: rgba(124,58,237,0.4);
+    border-color: rgba(155,42,255,0.4);
     transform: translateY(-3px);
   }
 
@@ -454,9 +477,9 @@
     height: 2px;
   }
 
-  .tech-card.influx::before { background: linear-gradient(90deg, var(--purple), var(--purple-light)); }
-  .tech-card.mcp::before { background: linear-gradient(90deg, var(--cyan-dim), var(--cyan)); }
-  .tech-card.claude::before { background: linear-gradient(90deg, #d97706, #f59e0b); }
+  .tech-card.influx::before { background: linear-gradient(90deg, #D30971, #9B2AFF); }
+  .tech-card.mcp::before { background: linear-gradient(90deg, #D30971, #9B2AFF); }
+  .tech-card.claude::before { background: linear-gradient(90deg, #D30971, #9B2AFF); }
 
   .tech-icon {
     width: 44px; height: 44px;
@@ -468,9 +491,9 @@
     font-size: 1.3rem;
   }
 
-  .tech-card.influx .tech-icon { background: rgba(124,58,237,0.15); }
-  .tech-card.mcp .tech-icon { background: rgba(34,211,238,0.12); }
-  .tech-card.claude .tech-icon { background: rgba(245,158,11,0.12); }
+  .tech-card.influx .tech-icon { background: #fff; color: #020A47; }
+  .tech-card.mcp .tech-icon { background: #fff; color: #020A47; }
+  .tech-card.claude .tech-icon { background: #fff; color: #020A47; }
 
   .tech-name {
     font-family: 'ProximaNova', sans-serif;
@@ -501,8 +524,8 @@
 
   .flow-diagram {
     margin-top: 3rem;
-    background: var(--navy-2);
-    border: 1px solid var(--border-subtle);
+    background: #fff;
+    border: 1px solid #E5E7EB;
     border-radius: 12px;
     padding: 2rem;
     display: flex;
@@ -514,18 +537,18 @@
   }
 
   .flow-node {
-    background: var(--navy-3);
-    border: 1px solid var(--border);
+    background: #FAFAFA;
+    border: 1px solid #E5E7EB;
     border-radius: 8px;
     padding: 0.75rem 1.25rem;
     font-size: 0.82rem;
     font-family: 'DM Mono', monospace;
-    color: var(--purple-light);
+    color: #020A47;
     white-space: nowrap;
   }
 
   .flow-arrow {
-    color: #fff;
+    color: #020A47;
     font-size: 1rem;
     padding: 0 0.75rem;
   }
@@ -554,7 +577,7 @@
     transition: border-color 0.2s;
   }
 
-  .team-card:hover { border-color: rgba(124,58,237,0.4); }
+  .team-card:hover { border-color: rgba(155,42,255,0.4); }
 
   .team-avatar {
     width: 36px; height: 36px;
@@ -605,7 +628,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-
   /* ── SATELLITE SELECTOR ── */
   .satellite-section {
     padding: 5rem 2rem;
@@ -643,7 +665,7 @@
   }
 
   .satellite-selector select:hover {
-    border-color: var(--purple-light);
+    border-color: rgba(155,42,255,0.4);
   }
 
   .satellite-status-badge {
@@ -731,6 +753,29 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.72rem;
     color: #fff;
+  }
+
+  /* ── RECOMMENDATION BOX ── */
+  .recommendation-box {
+    background: #FAFAFA;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 3rem;
+    border: 1px solid #E5E7EB;
+  }
+
+  .recommendation-box .step-num {
+    background: linear-gradient(135deg, #D30971, #9B2AFF);
+    border: 1px solid #D30971;
+    color: #fff;
+  }
+
+  .recommendation-box .step-text {
+    color: #020A47;
+  }
+
+  .recommendation-box .step-text strong {
+    color: #020A47;
   }
 </style>
 </head>
@@ -876,11 +921,14 @@
             <div class="step-num">04</div>
             <div class="step-text"><strong>Surface precedents</strong>Finds SPIRE-003 and SPIRE-009 events that preceded component failures 48–72hrs later.</div>
           </div>
-          <div class="solution-step">
-            <div class="step-num">05</div>
-            <div class="step-text"><strong>Recommend action</strong>Reduce tasking load, flag for engineering review, and schedule a maintenance window.</div>
-          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Recommendation Box -->
+    <div class="recommendation-box">
+      <div class="solution-step">
+        <div class="step-text"><strong>RECOMMEND ACTION</strong>Reduce tasking load, flag for engineering review, and schedule a maintenance window.</div>
       </div>
     </div>
   </div>
@@ -955,13 +1003,13 @@
 <script>
 const members = ["Morea","Jill","Charles","Ryan","Cole","Olga","Pat"];
 const colors = [
-  "135deg, #7c3aed, #0891b2",
-  "135deg, #0891b2, #10b981",
-  "135deg, #d97706, #ef4444",
-  "135deg, #10b981, #7c3aed",
-  "135deg, #ef4444, #d97706",
-  "135deg, #7c3aed, #ec4899",
-  "135deg, #0891b2, #7c3aed"
+  "135deg, #9B2AFF, #9394FF",
+  "135deg, #9B2AFF, #9394FF",
+  "135deg, #9B2AFF, #9394FF",
+  "135deg, #9B2AFF, #9394FF",
+  "135deg, #9B2AFF, #9394FF",
+  "135deg, #9B2AFF, #9394FF",
+  "135deg, #9B2AFF, #9394FF"
 ];
 
 const grid = document.getElementById("team-grid");
