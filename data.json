@@ -1,34 +1,45 @@
 {
-  "updated_at": "2026-04-24T08:14:42Z",
-  "satellites_online": 2,
+  "updated_at": "2026-04-24T09:23:19Z",
+  "satellites_online": 3,
   "total_satellites": 12,
   "active_anomalies": 0,
   "anomalies": [],
-  "active_ground_passes": 2,
-  "records_today": 6395,
+  "active_ground_passes": 3,
+  "records_today": 6280,
   "spire007": {},
   "all_satellites": {
-    "SPIRE-008": {
-      "satellite_id": "SPIRE-008",
-      "obc_temperature_c": 31.7,
-      "reaction_wheel_rpm": 3163.0,
-      "power_draw_mw": 1792.0,
-      "battery_voltage_v": 8.19,
-      "solar_current_ma": 528.8,
-      "rf_link_margin_db": 12.07,
+    "SPIRE-001": {
+      "satellite_id": "SPIRE-001",
+      "obc_temperature_c": 29.2,
+      "reaction_wheel_rpm": 3270.0,
+      "power_draw_mw": 1796.0,
+      "battery_voltage_v": 8.149,
+      "solar_current_ma": 524.3,
+      "rf_link_margin_db": 12.69,
       "attitude_status": "nominal",
-      "last_seen": "2026-04-24 08:14:27.272773888"
+      "last_seen": "2026-04-24 09:05:54.595120896"
     },
-    "SPIRE-009": {
-      "satellite_id": "SPIRE-009",
-      "obc_temperature_c": 33.0,
-      "reaction_wheel_rpm": 3154.0,
-      "power_draw_mw": 1794.0,
-      "battery_voltage_v": 8.253,
-      "solar_current_ma": 533.3,
-      "rf_link_margin_db": 12.5,
+    "SPIRE-003": {
+      "satellite_id": "SPIRE-003",
+      "obc_temperature_c": 31.7,
+      "reaction_wheel_rpm": 3261.0,
+      "power_draw_mw": 1810.0,
+      "battery_voltage_v": 8.141,
+      "solar_current_ma": 533.6,
+      "rf_link_margin_db": 12.39,
       "attitude_status": "nominal",
-      "last_seen": "2026-04-24 08:05:56.520601088"
+      "last_seen": "2026-04-24 08:48:28.453658880"
+    },
+    "SPIRE-005": {
+      "satellite_id": "SPIRE-005",
+      "obc_temperature_c": 28.2,
+      "reaction_wheel_rpm": 3262.0,
+      "power_draw_mw": 1766.0,
+      "battery_voltage_v": 8.167,
+      "solar_current_ma": 507.8,
+      "rf_link_margin_db": 12.78,
+      "attitude_status": "nominal",
+      "last_seen": "2026-04-24 08:33:03.909316096"
     }
   }
 }
