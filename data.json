@@ -1,23 +1,23 @@
 {
-  "updated_at": "2026-04-24T01:23:05Z",
+  "updated_at": "2026-04-24T01:24:07Z",
   "satellites_online": 3,
   "total_satellites": 12,
   "active_anomalies": 0,
   "anomalies": [],
   "active_ground_passes": 3,
-  "records_today": 6819,
+  "records_today": 6829,
   "spire007": {},
   "all_satellites": {
     "SPIRE-002": {
       "satellite_id": "SPIRE-002",
       "obc_temperature_c": 30.4,
-      "reaction_wheel_rpm": 3248.0,
-      "power_draw_mw": 1785.0,
-      "battery_voltage_v": 8.133,
-      "solar_current_ma": 510.7,
-      "rf_link_margin_db": 12.42,
+      "reaction_wheel_rpm": 3242.0,
+      "power_draw_mw": 1822.0,
+      "battery_voltage_v": 8.125,
+      "solar_current_ma": 513.4,
+      "rf_link_margin_db": 12.05,
       "attitude_status": "nominal",
-      "last_seen": "2026-04-24 01:23:00.613519104"
+      "last_seen": "2026-04-24 01:24:00.619292928"
     },
     "SPIRE-003": {
       "satellite_id": "SPIRE-003",
