@@ -1,23 +1,56 @@
 {
-  "updated_at": "2026-04-24T05:14:18Z",
-  "satellites_online": 2,
+  "updated_at": "2026-04-24T05:15:20Z",
+  "satellites_online": 3,
   "total_satellites": 12,
-  "active_anomalies": 0,
-  "anomalies": [],
+  "active_anomalies": 1,
+  "anomalies": [
+    {
+      "satellite_id": "SPIRE-007",
+      "obc_temperature_c": 42.6,
+      "reaction_wheel_rpm": 5164.0,
+      "power_draw_mw": 2492.0,
+      "battery_voltage_v": 8.045,
+      "solar_current_ma": 370.4,
+      "rf_link_margin_db": 11.59,
+      "attitude_status": "degraded",
+      "last_seen": "2026-04-24 05:15:18.175299072"
+    }
+  ],
   "active_ground_passes": 3,
   "records_today": 6857,
-  "spire007": {},
+  "spire007": {
+    "satellite_id": "SPIRE-007",
+    "obc_temperature_c": 42.6,
+    "reaction_wheel_rpm": 5164.0,
+    "power_draw_mw": 2492.0,
+    "battery_voltage_v": 8.045,
+    "solar_current_ma": 370.4,
+    "rf_link_margin_db": 11.59,
+    "attitude_status": "degraded",
+    "last_seen": "2026-04-24 05:15:18.175299072"
+  },
   "all_satellites": {
+    "SPIRE-007": {
+      "satellite_id": "SPIRE-007",
+      "obc_temperature_c": 42.6,
+      "reaction_wheel_rpm": 5164.0,
+      "power_draw_mw": 2492.0,
+      "battery_voltage_v": 8.045,
+      "solar_current_ma": 370.4,
+      "rf_link_margin_db": 11.59,
+      "attitude_status": "degraded",
+      "last_seen": "2026-04-24 05:15:18.175299072"
+    },
     "SPIRE-008": {
       "satellite_id": "SPIRE-008",
-      "obc_temperature_c": 31.3,
-      "reaction_wheel_rpm": 3181.0,
-      "power_draw_mw": 1790.0,
-      "battery_voltage_v": 8.251,
-      "solar_current_ma": 532.9,
-      "rf_link_margin_db": 12.02,
+      "obc_temperature_c": 31.5,
+      "reaction_wheel_rpm": 3250.0,
+      "power_draw_mw": 1828.0,
+      "battery_voltage_v": 8.226,
+      "solar_current_ma": 507.3,
+      "rf_link_margin_db": 12.11,
       "attitude_status": "nominal",
-      "last_seen": "2026-04-24 05:14:12.170232064"
+      "last_seen": "2026-04-24 05:14:24.173398016"
     },
     "SPIRE-009": {
       "satellite_id": "SPIRE-009",
