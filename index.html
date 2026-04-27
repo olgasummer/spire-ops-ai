@@ -2207,6 +2207,70 @@ async function loadHeroPanel() {
 loadHeroPanel();
 setInterval(loadHeroPanel, 10000);
 
+// ── Satellite selector ──
+let telemetryData = null;
+
+async function loadTelemetry() {
+  try {
+    const res = await fetch("data.json?_=" + Date.now());
+    if (!res.ok) throw new Error("not found");
+    telemetryData = await res.json();
+    updateSatDisplay();
+  } catch(e) {
+    console.log("data.json not available yet");
+  }
+}
+
+function updateSatDisplay() {
+  const select = document.getElementById("sat-select");
+  const satId = select.value;
+  const detail = document.getElementById("sat-detail");
+  const badge = document.getElementById("sat-status-badge");
+
+  if (!satId || !telemetryData) {
+    detail.innerHTML = '<div class="sat-offline-msg">Select a satellite above to view its latest telemetry.</div>';
+    badge.innerHTML = '';
+    return;
+  }
+
+  const sat = telemetryData.all_satellites && telemetryData.all_satellites[satId];
+
+  if (!sat) {
+    badge.innerHTML = '<span class="satellite-status-badge offline">● offline</span>';
+    detail.innerHTML = '<div class="sat-offline-msg">No recent telemetry for ' + satId + ' — satellite is between ground passes.</div>';
+    return;
+  }
+
+  const status = sat.attitude_status || "nominal";
+  badge.innerHTML = '<span class="satellite-status-badge ' + status + '">● ' + status + '</span>';
+
+  const tempColor = sat.obc_temperature_c > 38 ? '#fca5a5' : sat.obc_temperature_c > 33 ? '#fcd34d' : '#6ee7b7';
+  const rpmColor = sat.reaction_wheel_rpm > 4500 ? '#fca5a5' : '#fff';
+  const powerColor = sat.power_draw_mw > 2200 ? '#fca5a5' : '#fff';
+
+  detail.innerHTML = '<div class="sat-metrics-grid">' +
+    metricCard("OBC temperature", sat.obc_temperature_c, "°C", tempColor) +
+    metricCard("Battery voltage", sat.battery_voltage_v, "V", '#fff') +
+    metricCard("Solar current", sat.solar_current_ma, "mA", '#fff') +
+    metricCard("Reaction wheel", sat.reaction_wheel_rpm, "RPM", rpmColor) +
+    metricCard("Power draw", sat.power_draw_mw, "mW", powerColor) +
+    metricCard("RF link margin", sat.rf_link_margin_db, "dB", '#fff') +
+    '</div>' +
+    '<div class="sat-last-seen">Last telemetry received: ' + (sat.last_seen ? sat.last_seen.replace('T', ' ').substring(0, 19) + ' UTC' : 'unknown') + '</div>';
+}
+
+function metricCard(label, value, unit, color) {
+  return '<div class="sat-metric">' +
+    '<div class="sat-metric-label">' + label + '</div>' +
+    '<div class="sat-metric-value" style="color:' + color + '">' + value + '</div>' +
+    '<div class="sat-metric-unit">' + unit + '</div>' +
+    '</div>';
+}
+
+document.getElementById("sat-select").addEventListener("change", updateSatDisplay);
+loadTelemetry();
+setInterval(loadTelemetry, 60000);
+
 </script>
 </body>
 </html>
