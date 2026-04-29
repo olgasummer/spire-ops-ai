@@ -2170,44 +2170,9 @@ document.getElementById("sat-select").addEventListener("change", updateSatDispla
 loadTelemetry();
 setInterval(fetchTelemetry, 30000);
 
-// ── HERO PANEL: pull live SPIRE-007 data from InfluxDB ──
-async function loadHeroPanel() {
-  try {
-    const token = "apiv3_3Fl1mMgtYMYogWw927MgiaDg79VtXb7VRYSVY4ZiM";
-    const query = "SELECT obc_temperature_c, battery_voltage_v, reaction_wheel_rpm, solar_current_ma, rf_link_margin_db, time FROM satellite_telemetry WHERE satellite_id = 'SPIRE-007' ORDER BY time DESC LIMIT 1";
-    const res = await fetch("http://localhost:18282", {
-      method: "POST",
-      headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({ db: "spire_telemetry", q: query })
-    });
-    if (!res.ok) return;
-    const rows = await res.json();
-    if (!rows || rows.length === 0) return;
-    const d = rows[0];
-    const temp  = parseFloat(d.obc_temperature_c).toFixed(1);
-    const batt  = parseFloat(d.battery_voltage_v).toFixed(2);
-    const rpm   = Math.round(d.reaction_wheel_rpm);
-    const solar = parseFloat(d.solar_current_ma / 1000).toFixed(2);
-    const rf    = parseFloat(d.rf_link_margin_db).toFixed(1);
-    document.getElementById("hp-val-temp").textContent  = temp + "\u00b0C";
-    document.getElementById("hp-val-batt").textContent  = batt + "V";
-    document.getElementById("hp-val-rpm").textContent   = rpm.toLocaleString() + " RPM";
-    document.getElementById("hp-val-solar").textContent = solar + "A";
-    document.getElementById("hp-val-rf").textContent    = rf + "dB";
-    document.getElementById("hp-bar-temp").style.width  = Math.min(100, (temp / 80) * 100) + "%";
-    document.getElementById("hp-bar-batt").style.width  = Math.min(100, ((batt - 6) / 4) * 100) + "%";
-    document.getElementById("hp-bar-rpm").style.width   = Math.min(100, (rpm / 8000) * 100) + "%";
-    document.getElementById("hp-bar-solar").style.width = Math.min(100, (solar / 3) * 100) + "%";
-    document.getElementById("hp-bar-rf").style.width    = Math.min(100, ((rf + 5) / 20) * 100) + "%";
-    const ts = d.time ? d.time.toString().replace("T"," ").substring(0,19) + "Z" : "\u2014";
-    document.getElementById("hp-timestamp").textContent = ts;
-    document.getElementById("hp-alert-text").textContent =
-      "Processing Engine \u00b7 OBC temp " + temp + "\u00b0C \u00b7 RPM " + rpm.toLocaleString() + " \u00b7 anomaly plugin fired";
-  } catch(e) { /* InfluxDB not reachable — panel shows placeholder values */ }
-}
-loadHeroPanel();
-setInterval(loadHeroPanel, 10000);
-
+// ── HERO PANEL: dynamically show most active satellite ──
+// updateHeroPanel() is called by fetchTelemetry() above using data.json
+// No direct InfluxDB query needed here
 // ── Satellite selector ──
 let telemetryData = null;
 
