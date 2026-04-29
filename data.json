@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-29T05:15:12Z",
+  "updated_at": "2026-04-29T05:16:14Z",
   "satellites_online": 3,
   "total_satellites": 12,
   "active_anomalies": 1,
@@ -7,39 +7,39 @@
     {
       "satellite_id": "SPIRE-007",
       "obc_temperature_c": 42.3,
-      "reaction_wheel_rpm": 5256.0,
-      "power_draw_mw": 2493.0,
-      "battery_voltage_v": 8.15,
-      "solar_current_ma": 378.5,
-      "rf_link_margin_db": 12.1,
+      "reaction_wheel_rpm": 5041.0,
+      "power_draw_mw": 2552.0,
+      "battery_voltage_v": 8.075,
+      "solar_current_ma": 382.5,
+      "rf_link_margin_db": 11.67,
       "attitude_status": "degraded",
-      "last_seen": "2026-04-29 05:15:08.721003008"
+      "last_seen": "2026-04-29 05:16:08.718104064"
     }
   ],
   "active_ground_passes": 3,
-  "records_today": 6887,
+  "records_today": 6895,
   "spire007": {
     "satellite_id": "SPIRE-007",
     "obc_temperature_c": 42.3,
-    "reaction_wheel_rpm": 5256.0,
-    "power_draw_mw": 2493.0,
-    "battery_voltage_v": 8.15,
-    "solar_current_ma": 378.5,
-    "rf_link_margin_db": 12.1,
+    "reaction_wheel_rpm": 5041.0,
+    "power_draw_mw": 2552.0,
+    "battery_voltage_v": 8.075,
+    "solar_current_ma": 382.5,
+    "rf_link_margin_db": 11.67,
     "attitude_status": "degraded",
-    "last_seen": "2026-04-29 05:15:08.721003008"
+    "last_seen": "2026-04-29 05:16:08.718104064"
   },
   "all_satellites": {
     "SPIRE-007": {
       "satellite_id": "SPIRE-007",
       "obc_temperature_c": 42.3,
-      "reaction_wheel_rpm": 5256.0,
-      "power_draw_mw": 2493.0,
-      "battery_voltage_v": 8.15,
-      "solar_current_ma": 378.5,
-      "rf_link_margin_db": 12.1,
+      "reaction_wheel_rpm": 5041.0,
+      "power_draw_mw": 2552.0,
+      "battery_voltage_v": 8.075,
+      "solar_current_ma": 382.5,
+      "rf_link_margin_db": 11.67,
       "attitude_status": "degraded",
-      "last_seen": "2026-04-29 05:15:08.721003008"
+      "last_seen": "2026-04-29 05:16:08.718104064"
     },
     "SPIRE-008": {
       "satellite_id": "SPIRE-008",
