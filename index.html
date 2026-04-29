@@ -2094,6 +2094,7 @@ async function fetchTelemetry() {
     }
 
     const el = document.getElementById("last-updated");
+    updateHeroPanel(d);
     if (el) el.textContent = "Updated " + new Date().toUTCString().slice(17, 25) + " UTC";
 
   } catch(e) {
@@ -2270,6 +2271,73 @@ function metricCard(label, value, unit, color) {
 document.getElementById("sat-select").addEventListener("change", updateSatDisplay);
 loadTelemetry();
 setInterval(loadTelemetry, 60000);
+
+// ── Hero Panel — show most active satellite ──
+function updateHeroPanel(data) {
+  if (!data || !data.all_satellites) return;
+
+  const sats = data.all_satellites;
+  if (Object.keys(sats).length === 0) return;
+
+  // Pick anomaly satellite first, otherwise most recently seen
+  let chosen = null;
+  for (const [id, sat] of Object.entries(sats)) {
+    if (sat.attitude_status === 'degraded') { chosen = sat; break; }
+  }
+  if (!chosen) {
+    // Just pick first available
+    chosen = Object.values(sats)[0];
+  }
+
+  const isAnomaly = chosen.attitude_status === 'degraded';
+
+  // Update satellite ID labels
+  document.querySelectorAll('.hp-sat-id').forEach(el => el.textContent = chosen.satellite_id);
+  document.querySelectorAll('strong').forEach(el => {
+    if (el.textContent.startsWith('SPIRE-')) el.textContent = chosen.satellite_id;
+  });
+
+  // Update anomaly badge visibility
+  const badge = document.querySelector('.hp-anomaly-badge');
+  if (badge) badge.style.display = isAnomaly ? '' : 'none';
+
+  // Update metric values
+  const temp = chosen.obc_temperature_c;
+  const batt = chosen.battery_voltage_v;
+  const rpm  = chosen.reaction_wheel_rpm;
+  const solar = chosen.solar_current_ma;
+  const rf   = chosen.rf_link_margin_db;
+
+  const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  const setBar = (id, pct) => { const el = document.getElementById(id); if (el) el.style.width = pct + '%'; };
+
+  setVal('hp-val-temp',  temp  + '°C');
+  setVal('hp-val-batt',  batt  + 'V');
+  setVal('hp-val-rpm',   rpm   + ' RPM');
+  setVal('hp-val-solar', solar + ' mA');
+  setVal('hp-val-rf',    rf    + ' dB');
+
+  // Update bars (rough normalisation)
+  setBar('hp-bar-temp',  Math.min(100, (temp  / 60)  * 100));
+  setBar('hp-bar-batt',  Math.min(100, (batt  / 8.4) * 100));
+  setBar('hp-bar-rpm',   Math.min(100, (rpm   / 6000) * 100));
+  setBar('hp-bar-solar', Math.min(100, (solar / 700)  * 100));
+  setBar('hp-bar-rf',    Math.min(100, (rf    / 20)   * 100));
+
+  // Update timestamp
+  const ts = document.getElementById('hp-timestamp');
+  if (ts && chosen.last_seen) {
+    ts.textContent = chosen.last_seen.replace('T', ' ').substring(0, 19) + ' UTC';
+  }
+
+  // Update alert text
+  const alert = document.getElementById('hp-alert-text');
+  if (alert) {
+    alert.textContent = isAnomaly
+      ? 'Processing Engine · MAD anomaly plugin fired on ' + chosen.satellite_id
+      : 'Processing Engine · All systems nominal on ' + chosen.satellite_id;
+  }
+}
 
 </script>
 </body>
