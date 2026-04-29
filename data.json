@@ -1,45 +1,45 @@
 {
-  "updated_at": "2026-04-29T02:18:53Z",
+  "updated_at": "2026-04-29T02:19:55Z",
   "satellites_online": 2,
   "total_satellites": 12,
   "active_anomalies": 1,
   "anomalies": [
     {
       "satellite_id": "SPIRE-007",
-      "obc_temperature_c": 42.8,
-      "reaction_wheel_rpm": 5040.0,
-      "power_draw_mw": 2490.0,
-      "battery_voltage_v": 8.122,
-      "solar_current_ma": 369.3,
-      "rf_link_margin_db": 11.5,
+      "obc_temperature_c": 42.1,
+      "reaction_wheel_rpm": 5224.0,
+      "power_draw_mw": 2472.0,
+      "battery_voltage_v": 8.019,
+      "solar_current_ma": 378.9,
+      "rf_link_margin_db": 11.35,
       "attitude_status": "degraded",
-      "last_seen": "2026-04-29 02:18:50.578700032"
+      "last_seen": "2026-04-29 02:19:50.577288960"
     }
   ],
   "active_ground_passes": 3,
-  "records_today": 5573,
+  "records_today": 5581,
   "spire007": {
     "satellite_id": "SPIRE-007",
-    "obc_temperature_c": 42.8,
-    "reaction_wheel_rpm": 5040.0,
-    "power_draw_mw": 2490.0,
-    "battery_voltage_v": 8.122,
-    "solar_current_ma": 369.3,
-    "rf_link_margin_db": 11.5,
+    "obc_temperature_c": 42.1,
+    "reaction_wheel_rpm": 5224.0,
+    "power_draw_mw": 2472.0,
+    "battery_voltage_v": 8.019,
+    "solar_current_ma": 378.9,
+    "rf_link_margin_db": 11.35,
     "attitude_status": "degraded",
-    "last_seen": "2026-04-29 02:18:50.578700032"
+    "last_seen": "2026-04-29 02:19:50.577288960"
   },
   "all_satellites": {
     "SPIRE-007": {
       "satellite_id": "SPIRE-007",
-      "obc_temperature_c": 42.8,
-      "reaction_wheel_rpm": 5040.0,
-      "power_draw_mw": 2490.0,
-      "battery_voltage_v": 8.122,
-      "solar_current_ma": 369.3,
-      "rf_link_margin_db": 11.5,
+      "obc_temperature_c": 42.1,
+      "reaction_wheel_rpm": 5224.0,
+      "power_draw_mw": 2472.0,
+      "battery_voltage_v": 8.019,
+      "solar_current_ma": 378.9,
+      "rf_link_margin_db": 11.35,
       "attitude_status": "degraded",
-      "last_seen": "2026-04-29 02:18:50.578700032"
+      "last_seen": "2026-04-29 02:19:50.577288960"
     },
     "SPIRE-008": {
       "satellite_id": "SPIRE-008",
