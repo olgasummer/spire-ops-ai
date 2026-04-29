@@ -2052,53 +2052,40 @@ async function influxQuery(sql) {
 // ── Live stats bar ──
 async function fetchTelemetry() {
   try {
-    // Satellites with data in last 15 minutes
-    const onlineRows = await influxQuery(
-      "SELECT COUNT(DISTINCT satellite_id) as cnt FROM satellite_telemetry WHERE time >= now() - interval '15 minutes'"
-    );
-    const online = (onlineRows && onlineRows[0] && onlineRows[0].cnt) || 12;
-    document.getElementById("stat-online").textContent = online + "/12";
+    const res = await fetch("data.json?_=" + Date.now());
+    if (!res.ok) throw new Error("data.json not found");
+    const d = await res.json();
 
-    // Ground passes active right now
-    const passRows = await influxQuery(
-      "SELECT COUNT(DISTINCT satellite_id) as cnt FROM satellite_telemetry WHERE time >= now() - interval '2 minutes'"
-    );
-    const passes = (passRows && passRows[0] && passRows[0].cnt) || 0;
-    document.getElementById("stat-passes").textContent = passes;
+    // Satellites online
+    document.getElementById("stat-online").textContent = (d.satellites_online || 0) + "/12";
 
-    // SPIRE-007 latest temp
-    const tempRows = await influxQuery(
-      "SELECT obc_temperature_c, reaction_wheel_rpm, power_draw_mw, attitude_status FROM satellite_telemetry WHERE satellite_id = 'SPIRE-007' ORDER BY time DESC LIMIT 1"
-    );
-    if (tempRows && tempRows.length > 0) {
-      const s7 = tempRows[0];
-      const temp = parseFloat(s7.obc_temperature_c).toFixed(1);
-      const rpm  = Math.round(s7.reaction_wheel_rpm).toLocaleString();
-      const pwr  = Math.round(s7.power_draw_mw);
-      const status = s7.attitude_status || "nominal";
+    // Ground passes
+    document.getElementById("stat-passes").textContent = d.active_ground_passes || 0;
 
-      document.getElementById("stat-temp").textContent = temp + "°C";
+    // Anomalies
+    document.getElementById("stat-anomalies").textContent = d.active_anomalies || 0;
 
-      // Anomalies = degraded satellites in last 15 min
-      const anomalyRows = await influxQuery(
-        "SELECT COUNT(DISTINCT satellite_id) as cnt FROM satellite_telemetry WHERE attitude_status = 'degraded' AND time >= now() - interval '15 minutes'"
-      );
-      const anomalies = (anomalyRows && anomalyRows[0] && anomalyRows[0].cnt) || (status === "degraded" ? 1 : 0);
-      document.getElementById("stat-anomalies").textContent = anomalies;
-
-      // Update anomaly banner
-      if (status === "degraded") {
+    // SPIRE-007 temp
+    if (d.spire007 && d.spire007.obc_temperature_c) {
+      document.getElementById("stat-temp").textContent = d.spire007.obc_temperature_c + "°C";
+      if (d.spire007.attitude_status === "degraded") {
         const desc = document.querySelector(".anomaly-desc");
-        if (desc) desc.textContent = "OBC temperature " + temp + "°C · Reaction wheel RPM " + rpm + " · Power draw " + pwr + "mW · Attitude status: degraded";
+        if (desc) desc.textContent =
+          "OBC temperature " + d.spire007.obc_temperature_c + "°C · " +
+          "Reaction wheel RPM " + d.spire007.reaction_wheel_rpm + " · " +
+          "Power draw " + d.spire007.power_draw_mw + "mW · Attitude status: degraded";
       }
     }
 
+    // Last updated
     const el = document.getElementById("last-updated");
+    if (el && d.updated_at) el.textContent = "Updated " + timeAgo(d.updated_at);
+
+    // Hero panel
     updateHeroPanel(d);
-    if (el) el.textContent = "Updated " + new Date().toUTCString().slice(17, 25) + " UTC";
 
   } catch(e) {
-    console.log("InfluxDB not reachable — using placeholder values:", e.message);
+    console.log("data.json not reachable:", e.message);
   }
 }
 
